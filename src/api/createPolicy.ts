@@ -10,7 +10,7 @@ export async function createPolicy(
         policyGroup,
         strategy
     })
-    return response.data as Policy
+    return response.data as Policy[]
 }
 
 export async function createGasSponsoringPolicy(projectId: string) {

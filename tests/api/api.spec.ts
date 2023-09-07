@@ -10,8 +10,8 @@ describe('API', () => {
     })
 
     it('Creates a new Policy', async () => {
-        const policy = await createGasSponsoringPolicy(project.id)
-        expect(policy.id).not.toBeNull()
+        const policies = await createGasSponsoringPolicy(project.id)
+        expect(policies.length).toBeGreaterThan(0)
     })
 
     it('deletes a project', async () => {

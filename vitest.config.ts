@@ -5,6 +5,6 @@ export default defineProject({
     singleThread: true,
     globals: true,
     setupFiles: [".vitest/setupTests.ts"],
-    name: "aa-utilities",
+    name: "e2e-tests",
   },
 });
