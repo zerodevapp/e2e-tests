@@ -1,10 +1,10 @@
 import { createGasSponsoringPolicy, createProject, deleteProject } from "../../src/api"
 import { TEAM_ID } from "../../src/constants"
-import { Project } from "../../src/types"
+import type { Project } from "../../src/types"
 
 describe('API', () => {
     let project: Project
-    it('Creates a new Project', async () => {
+    it('Creates a new Project', async (context) => {
         project = await createProject(TEAM_ID, 'My Project', '80001')
         expect(project.id).not.toBeNull()
     })
