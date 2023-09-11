@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "test": "vitest run .",
+    "test:e2e": "vitest run .",
     "lint:write": "eslint . --fix && prettier --write --ignore-unknown .",
     "lint:check": "eslint . && prettier --check ."
   },
