@@ -63,4 +63,4 @@ export const ERC721_ABI = parseAbi([
     'function balanceOf(address owner) external view returns (uint256 balance)'
 ])
 
-export const PROVIDERS = ['ALCHEMY', 'PIMLICO', 'STACKUP'] as const
+export const PROVIDERS = ['ALCHEMY', /*'PIMLICO',*/ 'STACKUP'] as const
