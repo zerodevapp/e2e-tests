@@ -1,6 +1,6 @@
 import { test, type TestAPI } from 'vitest'
-import { PRIVATE_KEY } from '../constants'
 import { PrivateKeySigner, type SmartAccountSigner } from '@alchemy/aa-core'
+  import { generatePrivateKey } from 'viem/accounts'
 
 interface OwnerFixtures {
   privateKeyOwner: SmartAccountSigner
@@ -8,7 +8,7 @@ interface OwnerFixtures {
 
 export const ownerFixtures: Parameters<typeof test.extend<OwnerFixtures>>[0] = {
   privateKeyOwner: async ({ task }, use) => {
-    await use (PrivateKeySigner.privateKeyToAccountSigner(PRIVATE_KEY))
+    await use (PrivateKeySigner.privateKeyToAccountSigner(generatePrivateKey()))
   },
 }
 

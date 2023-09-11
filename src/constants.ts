@@ -1,9 +1,9 @@
-import { parseAbi, type Hex } from "viem"
+import { TEST_ERC20Abi } from "@zerodev/sdk"
+import { parseAbi } from "viem"
 
 export const API_URL = process.env.API_URL!
 export const API_KEY = process.env.API_KEY!
 export const TEAM_ID = process.env.TEAM_ID!
-export const PRIVATE_KEY = process.env.PRIVATE_KEY! as Hex
 
 export const TESTNET_CHAIN_IDS = ['5', '420', '421613', '43113', '80001', '84531', '10200'] as const
 export const MAINNET_CHAINS_IDS = ['1', '10', '137', '42161', '43114', '56', '8453', '100'] as const
@@ -26,7 +26,6 @@ export const CHAIN_MAP = {
     'gnosisChiado': '10200',
     'bsc': '56',
 } as const
-
 
 export const INFURA_API_KEY = "f36f7f706a58477884ce6fe89165666c";
 export const CHAIN_NODE_MAP = {
@@ -62,5 +61,16 @@ export const ERC721_ABI = parseAbi([
     'function mint(address _to) public',
     'function balanceOf(address owner) external view returns (uint256 balance)'
 ])
+
+export const ERC20_MAP = {
+    'goerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
+    'polygonMumbai': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
+    'arbitrumGoerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
+    'optimismGoerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
+    'avalancheFuji': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
+    'baseGoerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B'
+}  as const
+
+export const ERC20_ABI = TEST_ERC20Abi
 
 export const PROVIDERS = ['ALCHEMY', /*'PIMLICO',*/ 'STACKUP'] as const

@@ -1,30 +1,16 @@
-import { ECDSAProvider } from "@zerodev/sdk";
+import { ZeroDevProvider } from "@zerodev/sdk";
 import { type Hex, encodeFunctionData, type PublicClient } from "viem";
-import { type SmartAccountSigner, type UserOperationCallData } from "@alchemy/aa-core";
-import type { Contract, Project } from "../../src/types";
-import { PROVIDERS } from "../../src/constants";
+import { type UserOperationCallData } from "@alchemy/aa-core";
+import type { Contract } from "../../src/types";
 
 type MintingOptions = {
-    project: Project
-    owner: SmartAccountSigner
+    provider: ZeroDevProvider
     publicClient: PublicClient
     erc721: Contract
-    provider?: typeof PROVIDERS[number]
 }
 
-export async function minting({ project, owner, publicClient, erc721, provider}: MintingOptions) {
-    let ecdsaProvider = await ECDSAProvider.init({
-        projectId: project.id, 
-        bundlerProvider: provider,
-        owner,
-        opts: {
-            paymasterConfig: {
-                policy: "VERIFYING_PAYMASTER",
-                paymasterProvider: provider
-            },
-        }
-    });
-    const address = await ecdsaProvider.getAddress()
+export async function minting({ provider, publicClient, erc721}: MintingOptions) {
+    const address = await provider.getAddress()
 
     const oldBalance = await publicClient.readContract({ address: erc721.address, abi: erc721.abi, functionName: 'balanceOf', args: [address] }) as bigint
 
@@ -33,9 +19,9 @@ export async function minting({ project, owner, publicClient, erc721, provider}:
         data: encodeFunctionData({abi: erc721.abi, functionName: 'mint', args: [address]})
     }
 
-    const { hash } = await ecdsaProvider.sendUserOperation(userOperation);
+    const { hash } = await provider.sendUserOperation(userOperation);
 
-    await ecdsaProvider.waitForUserOperationTransaction(hash as Hex)
+    await provider.waitForUserOperationTransaction(hash as Hex)
 
     const newBalance = await publicClient.readContract({ address: erc721.address, abi: erc721.abi, functionName: 'balanceOf', args: [address] }) as bigint
 
