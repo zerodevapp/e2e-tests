@@ -12,6 +12,7 @@ export const CHAIN_IDS = [...TESTNET_CHAIN_IDS, ...MAINNET_CHAINS_IDS] as const
 export const CHAIN_MAP = {
     'mainnet': '1',
     'goerli': '5',
+    'sepolia': '11155111',
     'polygon': '137',
     'polygonMumbai': '80001',
     'arbitrum': '42161',
@@ -31,6 +32,7 @@ export const INFURA_API_KEY = "f36f7f706a58477884ce6fe89165666c";
 export const CHAIN_NODE_MAP = {
   'mainnet': `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
   'goerli': `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+  'sepolia': 'https://fittest-ultra-aura.ethereum-sepolia.quiknode.pro/3893d01b1dd411fdfa9b6dd372dd2b4f69fcf1ea/',
   'polygon': `https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}`,
   'polygonMumbai': `https://polygon-mumbai.infura.io/v3/${INFURA_API_KEY}`,
   'arbitrum': `https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}`,
@@ -68,7 +70,8 @@ export const ERC20_MAP = {
     'arbitrumGoerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
     'optimismGoerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
     'avalancheFuji': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
-    'baseGoerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B'
+    'baseGoerli': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
+    'sepolia': '0x3870419Ba2BBf0127060bCB37f69A1b1C090992B',
 }  as const
 
 export const ERC20_ABI = TEST_ERC20Abi
