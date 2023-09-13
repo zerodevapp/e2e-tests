@@ -1,7 +1,7 @@
 # ZeroDev - E2E Tests
 
-[!WARNING]  
-Running any test on a team will delete all projects in the process. Therefore, run only for teams you don't care.
+> **Warning**
+> Running any test on a team will delete all projects in the process. Therefore, run only for teams you don't care.
 
 ## Setup
 
@@ -19,8 +19,8 @@ Then open `.env` and set `API_KEY` and `TEAM_ID`.
 
 You can generate an `API_KEY` here: https://dashboard.zerodev.app/account<br />
 
-[!WARNING]  
-Make sure to create a new team specifically for the tests since projects will be wiped.
+> **Warning**
+> Make sure to create a new team specifically for the tests since projects will be wiped.
 
 Create a new team on our [Dashboard](https://dashboard.zerodev.app/team) and then copy the `TEAM_ID`. 
 
