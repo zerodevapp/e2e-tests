@@ -5,7 +5,7 @@ export const API_URL = process.env.API_URL!
 export const API_KEY = process.env.API_KEY!
 export const TEAM_ID = process.env.TEAM_ID!
 
-export const TESTNET_CHAIN_IDS = ['5', '420', '421613', '43113', '80001', '84531', '10200'] as const
+export const TESTNET_CHAIN_IDS = ['5', '420', '421613', '43113', '80001', '84531', '10200', '11155111'] as const
 export const MAINNET_CHAINS_IDS = ['1', '10', '137', '42161', '43114', '56', '8453', '100'] as const
 export const CHAIN_IDS = [...TESTNET_CHAIN_IDS, ...MAINNET_CHAINS_IDS] as const
 
