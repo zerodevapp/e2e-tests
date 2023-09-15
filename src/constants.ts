@@ -1,9 +1,8 @@
 import { TEST_ERC20Abi } from "@zerodev/sdk"
 import { parseAbi } from "viem"
 
-export const API_URL = process.env.API_URL!
-export const API_KEY = process.env.API_KEY!
-export const TEAM_ID = process.env.TEAM_ID!
+// export const API_URL = "https://prod-api.zerodev.app"
+export const API_URL = "http://localhost:4003"
 
 export const TESTNET_CHAIN_IDS = ['5', '420', '421613', '43113', '80001', '84531', '10200', '11155111'] as const
 export const MAINNET_CHAINS_IDS = ['1', '10', '137', '42161', '43114', '56', '8453', '100'] as const
@@ -56,7 +55,10 @@ export const ERC721_MAP = {
     'arbitrum': '0x34bE7f35132E97915633BC1fc020364EA5134863',
     'gnosis': '0xfEe13462D096C2B9205C8B0C3B985bD4693e08B1',
     'gnosisChiado': '0xfEe13462D096C2B9205C8B0C3B985bD4693e08B1',
-    'bsc': '0xfEe13462D096C2B9205C8B0C3B985bD4693e08B1'
+    'bsc': '0xfEe13462D096C2B9205C8B0C3B985bD4693e08B1',
+    'base': '0xfEe13462D096C2B9205C8B0C3B985bD4693e08B1',
+    'sepolia': '0xfEe13462D096C2B9205C8B0C3B985bD4693e08B1',
+    'baseGoerli': '0xfEe13462D096C2B9205C8B0C3B985bD4693e08B1',
 }  as const
 
 export const ERC721_ABI = parseAbi([

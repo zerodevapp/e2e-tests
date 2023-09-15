@@ -4,6 +4,7 @@ import { PrivateKeySigner, type SmartAccountSigner } from "@alchemy/aa-core";
 import type { Contract, Project } from "../../src/types";
 import { generatePrivateKey } from "viem/accounts";
 import { batching } from "./batching";
+import type { ExpectStatic } from "vitest";
 
 type SessionKeyOptions = {
     project: Project
@@ -12,7 +13,7 @@ type SessionKeyOptions = {
     erc721: Contract
 }
 
-export async function sessionKey({ project, owner, publicClient, erc721}: SessionKeyOptions) {
+export async function sessionKey({ project, owner, publicClient, erc721}: SessionKeyOptions, expect: ExpectStatic) {
     let ecdsaProvider = await ECDSAProvider.init({
         projectId: project.id, 
         owner,
@@ -35,5 +36,5 @@ export async function sessionKey({ project, owner, publicClient, erc721}: Sessio
             permissions: []
         }
     })
-    await batching({ provider: sessionKeyProvider, publicClient, erc721 })
+    await batching({ provider: sessionKeyProvider, publicClient, erc721 }, expect)
 }

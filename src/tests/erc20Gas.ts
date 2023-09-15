@@ -4,6 +4,7 @@ import type { Contract, Project } from "../types";
 import type { SmartAccountSigner, UserOperationCallData } from "@alchemy/aa-core";
 import { createGasSponsoringPolicy, createProject } from "../api";
 import { deploying } from "./deploying";
+import type { ExpectStatic } from "vitest";
 
 type ERC20GasOptions = {
 	project: Project
@@ -12,7 +13,7 @@ type ERC20GasOptions = {
 	erc20: Contract
 }
 
-export async function erc20Gas({ project, owner, publicClient, erc20 }: ERC20GasOptions) {
+export async function erc20Gas({ project, owner, publicClient, erc20 }: ERC20GasOptions, expect: ExpectStatic) {
     const ecdsaProvider = await ECDSAProvider.init({
         projectId: project.id, 
         owner,
@@ -56,20 +57,20 @@ export async function erc20Gas({ project, owner, publicClient, erc20 }: ERC20Gas
 	oldBalanceSnapshot = balanceSnapshot
 
 	// uses gas sponsoring by default
-	await deploying({ provider: ecdsaProvider })
+	await deploying({ provider: ecdsaProvider }, expect)
 	balanceSnapshot = await getBalance()
 	expect(balanceSnapshot).toBe(oldBalanceSnapshot)
 	oldBalanceSnapshot = balanceSnapshot
 
 	// uses erc20 gas
-	await deploying({ provider: erc20ECDSAProvider })
+	await deploying({ provider: erc20ECDSAProvider }, expect)
 	balanceSnapshot = await getBalance()
 	expect(balanceSnapshot).toBeLessThan(oldBalanceSnapshot)
 	oldBalanceSnapshot = balanceSnapshot
 
 	// if gas sponsoring is set, it overwrites erc20 gas payment
 	await createGasSponsoringPolicy(projectWithoutSponsoring)
-	await deploying({ provider: erc20ECDSAProvider })
+	await deploying({ provider: erc20ECDSAProvider }, expect)
 	balanceSnapshot = await getBalance()
 	expect(balanceSnapshot).toBe(oldBalanceSnapshot)
 }

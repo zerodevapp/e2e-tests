@@ -3,15 +3,16 @@ import { verifyMessage } from '@ambire/signature-validator';
 import ethers from 'ethers';
 import { deploying } from "./deploying";
 import type { Hex } from "viem";
+import type { ExpectStatic } from "vitest";
 
 type SigningOptions = {
     provider: ZeroDevProvider
     jsonRpcProvider: ethers.providers.JsonRpcProvider
 }
 
-export async function signMessage({provider, jsonRpcProvider}: SigningOptions) {
+export async function signMessage({provider, jsonRpcProvider}: SigningOptions, expect: ExpectStatic) {
     // needs to be deployed
-    await deploying({provider})
+    await deploying({provider}, expect)
 
     const message = 'Hello World'
     const signature = await provider.signMessage(message)
@@ -24,14 +25,14 @@ export async function signMessage({provider, jsonRpcProvider}: SigningOptions) {
     expect(isValidSig).toBeTruthy()
 }
 
-export async function signTypedData({provider, jsonRpcProvider}: SigningOptions) {
+export async function signTypedData({provider, jsonRpcProvider}: SigningOptions, expect: ExpectStatic) {
     // needs to be deployed
-    await deploying({provider})
+    await deploying({provider}, expect)
 
     const domain = {
         name: "Ether Mail",
         version: "1",
-        chainId: 1,
+        chainId: 80001,
         verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC" as Hex,
     };
 
