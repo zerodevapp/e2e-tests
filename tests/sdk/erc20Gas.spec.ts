@@ -34,7 +34,7 @@ describe.sequential('erc20Gas', () => {
                 await erc20Gas({project, owner, publicClient, erc20 }, expect),
                 await deleteProject(project)
             },
-            240000
+            60000
         )
     }
 })

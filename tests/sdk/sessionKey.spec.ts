@@ -30,7 +30,7 @@ describe.sequential('sessionKey', () => {
                         await sessionKey({project, owner, publicClient, erc721, provider }, expect),
                         await deleteProject(project)
                     },
-                    240000
+                    60000
                 )
             }
         })

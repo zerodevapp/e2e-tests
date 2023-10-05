@@ -45,7 +45,7 @@ describe.sequential('minting', () => {
                         await minting({provider: ecdsaProvider, publicClient, erc721 }, expect),
                         await deleteProject(project)
                     },
-                    240000
+                    60000
                 )
             }
         })

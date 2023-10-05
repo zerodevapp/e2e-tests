@@ -33,5 +33,5 @@ describe("signing", () => {
             provider: ecdsaProvider,
             jsonRpcProvider
         }, expect)
-    }, 120000)
+    }, 60000)
 })

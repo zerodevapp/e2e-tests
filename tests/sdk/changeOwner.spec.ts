@@ -19,7 +19,7 @@ describe.sequential('changeOwner', () => {
                         await changeOwner({project, owner, provider}, expect),
                         await deleteProject(project)
                     },
-                    240000
+                    60000
                 )
             }
         })
