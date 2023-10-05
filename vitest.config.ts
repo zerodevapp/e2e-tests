@@ -6,6 +6,7 @@ export default defineProject({
     setupFiles: [".vitest/setupTests.ts"],
     exclude: [...configDefaults.exclude, "../**/*.test.ts", "../**/*.spec.ts"],
     name: "e2e-tests",
-    maxConcurrency: 10
+    maxConcurrency: 10,
+    singleThread: true // Seems buggy with multiple threads
   },
 });

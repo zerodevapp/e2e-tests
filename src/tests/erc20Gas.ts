@@ -1,6 +1,6 @@
 import { ECDSAProvider } from "@zerodev/sdk";
 import { encodeFunctionData, type Hex, type PublicClient } from "viem";
-import type { Contract, Project } from "../types";
+import type { Contract, Project, Provider } from "../types";
 import type { SmartAccountSigner, UserOperationCallData } from "@alchemy/aa-core";
 import { createGasSponsoringPolicy, createProject } from "../api";
 import { deploying } from "./deploying";
@@ -11,29 +11,40 @@ type ERC20GasOptions = {
 	owner: SmartAccountSigner,
 	publicClient: PublicClient
 	erc20: Contract
+	provider?: Provider
 }
 
-export async function erc20Gas({ project, owner, publicClient, erc20 }: ERC20GasOptions, expect: ExpectStatic) {
+export async function erc20Gas({ project, owner, publicClient, erc20, provider }: ERC20GasOptions, expect: ExpectStatic) {
     const ecdsaProvider = await ECDSAProvider.init({
         projectId: project.id, 
         owner,
+		bundlerProvider: provider,
         opts: {
             paymasterConfig: {
                 policy: 'VERIFYING_PAYMASTER',
+				paymasterProvider: provider
             },
+			providerConfig: {
+				bundlerProvider: provider
+			}
         }
     });
 
-    const projectWithoutSponsoring = await createProject(project.teamId, 'Sponsorless', project.chainId)
+    const projectWithoutSponsoring = await createProject({ id: project.teamId }, 'Sponsorless', project.chainId)
 
     const erc20ECDSAProvider = await ECDSAProvider.init({
         projectId: projectWithoutSponsoring.id, 
         owner,
+		bundlerProvider: provider,
         opts: {
             paymasterConfig: {
                 policy: 'TOKEN_PAYMASTER',
-                gasToken: 'TEST_ERC20'
+                gasToken: 'TEST_ERC20',
+				paymasterProvider: provider
             },
+			providerConfig: {
+				bundlerProvider: provider
+			}
         }
     })
 

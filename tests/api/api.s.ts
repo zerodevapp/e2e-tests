@@ -11,7 +11,7 @@ describe.sequential('API', () => {
     })
 
     it('creates a project', async () => {
-        project = await createProject(team.id, 'My Project', '80001')
+        project = await createProject(team, 'My Project', '80001')
         expect(project.id).not.toBeNull()
     })
 

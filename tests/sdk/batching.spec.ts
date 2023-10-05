@@ -1,6 +1,6 @@
 import { batching } from "../../src/tests";
 import { CHAIN_MAP, CHAIN_NODE_MAP, ERC721_ABI, ERC721_MAP, PROVIDERS } from "../../src/constants";
-import { createGasSponsoringPolicy, createProject, createTeam, deleteProject } from "../../src/api";
+import { createGasSponsoringPolicy, createProject, deleteProject } from "../../src/api";
 import { ownerFixtures } from "../../src/fixtures/ownerFixtures";
 import { createPublicClient, http } from "viem";
 import * as viemChains from 'viem/chains'
@@ -12,27 +12,26 @@ const chains = ['arbitrum', 'polygonMumbai', 'goerli', 'polygon', 'base', 'sepol
 // runs test for each chain
 describe.sequential('batching', () => {
     for (let provider of PROVIDERS)  {
-        describe(provider, () => {
-            // beforeAll(async () => {
-            //     await Promise.all((await listProjects(TEAM_ID)).map(deleteProject))
-            // })
-            // afterAll(async () => {
-            //     await Promise.all((await listProjects(TEAM_ID)).map(deleteProject))
-            // })
+        describe(provider || 'Default', () => {
             for (let chain of chains) {
                 it.extend(ownerFixtures).extend(teamFixtures).concurrent(
                     chain,
                     async ({privateKeyOwner: owner, team, expect}) => {
                         const chainId = CHAIN_MAP[chain]
-                        const project = await createProject(team.id, 'TestProject', chainId)
+                        const project = await createProject(team, 'TestProject', chainId)
                         await createGasSponsoringPolicy(project)
                         const ecdsaProvider = await ECDSAProvider.init({
                             projectId: project.id, 
                             owner,
+                            bundlerProvider: provider,
                             opts: {
                                 paymasterConfig: {
                                     policy: "VERIFYING_PAYMASTER",
+                                    paymasterProvider: provider
                                 },
+                                providerConfig: {
+                                    bundlerProvider: provider,
+                                }
                             }
                         });
                         const publicClient = createPublicClient({ 

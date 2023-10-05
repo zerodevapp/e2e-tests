@@ -78,4 +78,4 @@ export const ERC20_MAP = {
 
 export const ERC20_ABI = TEST_ERC20Abi
 
-export const PROVIDERS = ['ALCHEMY', /*'PIMLICO',*/ 'STACKUP'] as const
+export const PROVIDERS = [undefined, 'ALCHEMY', /*'PIMLICO',*/ 'STACKUP'] as const

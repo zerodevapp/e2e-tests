@@ -29,5 +29,5 @@
     "sourceMap": true
   },
   "exclude": ["**/*/node_modules", "./dist", "vitest.config.ts"],
-  "include": ["src", "tests"]
+  "include": ["src", "tests", "scripts"]
 }

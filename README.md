@@ -1,41 +1,38 @@
 # ZeroDev - E2E Tests
 
 > **Warning**
-> Running any test on a team will delete all projects in the process. Therefore, run only for teams you don't care.
+> Running the test suite will delete all teams and all projects in the process. Therefore, run only for accounts you don't care.
 
 ## Setup
 
 ### Install dependencies
-```
+
+```bash
 npm i
 ```
 
 ### Setup environment variables
-```
+
+```bash
 cp .env-example .env
 ```
 
-Then open `.env` and set `API_KEY` and `TEAM_ID`.
-
-You can generate an `API_KEY` here: https://dashboard.zerodev.app/account<br />
+Then open `.env` and set `API_KEY`.
 
 > **Warning**
-> Make sure to create a new team specifically for the tests since projects will be wiped.
-
-Create a new team on our [Dashboard](https://dashboard.zerodev.app/team) and then copy the `TEAM_ID`. 
+> Make sure to create a new account specifically for the tests since teams & projects will be wiped.
+You can generate an `API_KEY` here: https://dashboard.zerodev.app/account<br />
 
 ## Run
 
 ### Complete
-```
+
+```bash
 npm run test:e2e
 ```
 
 ### Specific
-```
+
+```bash
 npm run test:e2e tests/sdk/deploying.spec.ts
 ```
-
-
-## Common issues
-Since e2e tests are running in our production environment sometimes a transaction gets processed before the project gets deleted such the project is not deletable anymore --> the team cannot be used for e2e tests anymore.

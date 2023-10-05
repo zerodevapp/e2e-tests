@@ -10,7 +10,7 @@ type ProjectFixtures = {
 const createProjectFixture = (chainId: ChainId) => {
   //@ts-expect-error
   return async ({task, team}, use) => {
-    const project = await createProject(team.id, 'Test Project', chainId)
+    const project = await createProject(team, 'Test Project', chainId)
     await createGasSponsoringPolicy(project)
     await use(project)
     await deleteProject(project)

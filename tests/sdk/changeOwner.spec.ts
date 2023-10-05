@@ -9,14 +9,14 @@ const chains = ['arbitrum', 'polygonMumbai', 'goerli', 'polygon', 'base', 'sepol
 // runs test for each chain
 describe.sequential('changeOwner', () => {
     for (let provider of PROVIDERS)  {
-        describe(provider, () => {
+        describe(provider || 'Default', () => {
             for (let chain of chains) {
                 it.extend(ownerFixtures).extend(teamFixtures).concurrent(
                     chain,
                     async ({privateKeyOwner: owner, team, expect}) => {
-                        const project = await createProject(team.id, 'TestProject', CHAIN_MAP[chain])
+                        const project = await createProject(team, 'TestProject', CHAIN_MAP[chain])
                         await createGasSponsoringPolicy(project)
-                        await changeOwner({project, owner}, expect),
+                        await changeOwner({project, owner, provider}, expect),
                         await deleteProject(project)
                     },
                     240000
