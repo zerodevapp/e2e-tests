@@ -1,8 +1,8 @@
 import { TEST_ERC20Abi } from "@zerodev/sdk"
 import { parseAbi } from "viem"
 
-// export const API_URL = "https://prod-api.zerodev.app"
-export const API_URL = "http://localhost:4003"
+export const API_URL = "https://prod-api.zerodev.app"
+// export const API_URL = "http://localhost:4003"
 
 export const TESTNET_CHAIN_IDS = ['5', '420', '421613', '43113', '80001', '84531', '10200', '11155111'] as const
 export const MAINNET_CHAINS_IDS = ['1', '10', '137', '42161', '43114', '56', '8453', '100'] as const
