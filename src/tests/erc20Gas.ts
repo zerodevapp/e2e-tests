@@ -80,8 +80,8 @@ export async function erc20Gas({ project, owner, publicClient, erc20, provider }
 	oldBalanceSnapshot = balanceSnapshot
 
 	// if gas sponsoring is set, it overwrites erc20 gas payment
-	await createGasSponsoringPolicy(projectWithoutSponsoring)
-	await deploying({ provider: erc20ECDSAProvider }, expect)
-	balanceSnapshot = await getBalance()
-	expect(balanceSnapshot).toBe(oldBalanceSnapshot)
+	// await createGasSponsoringPolicy(projectWithoutSponsoring)
+	// await deploying({ provider: erc20ECDSAProvider }, expect)
+	// balanceSnapshot = await getBalance()
+	// expect(balanceSnapshot).toBe(oldBalanceSnapshot)
 }

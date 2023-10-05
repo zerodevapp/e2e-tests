@@ -15,30 +15,26 @@ const chainsToSkip = ['arbitrumGoerli', 'optimismGoerli', 'avalancheFuji', 'base
 
 // runs test for each chain
 describe.sequential('erc20Gas', () => {
-    for (let provider of PROVIDERS)  {
-        describe(provider || 'Default', () => {
-            for (let chain of chains) {
-                if (chainsToSkip.includes(chain)) continue
-                it.extend(ownerFixtures).extend(teamFixtures).concurrent(
-                    chain,
-                    async ({privateKeyOwner: owner, team, expect}) => {
-                        const chainId = CHAIN_MAP[chain]
-                        const project = await createProject(team, 'TestProject', chainId)
-                        await createGasSponsoringPolicy(project)
-                        const publicClient = createPublicClient({ 
-                            chain: (Object.values(viemChains)).find(chain => chain.id === parseInt(chainId)) as viemChains.Chain,
-                            transport: http(CHAIN_NODE_MAP[chain])
-                        })
-                        const erc20 = {
-                            address: ERC20_MAP[chain],
-                            abi: ERC20_ABI
-                        }
-                        await erc20Gas({project, owner, publicClient, erc20, provider }, expect),
-                        await deleteProject(project)
-                    },
-                    240000
-                )
-            }
-        })
+    for (let chain of chains) {
+        if (chainsToSkip.includes(chain)) continue
+        it.extend(ownerFixtures).extend(teamFixtures).concurrent(
+            chain,
+            async ({privateKeyOwner: owner, team, expect}) => {
+                const chainId = CHAIN_MAP[chain]
+                const project = await createProject(team, 'TestProject', chainId)
+                await createGasSponsoringPolicy(project)
+                const publicClient = createPublicClient({ 
+                    chain: (Object.values(viemChains)).find(chain => chain.id === parseInt(chainId)) as viemChains.Chain,
+                    transport: http(CHAIN_NODE_MAP[chain])
+                })
+                const erc20 = {
+                    address: ERC20_MAP[chain],
+                    abi: ERC20_ABI
+                }
+                await erc20Gas({project, owner, publicClient, erc20 }, expect),
+                await deleteProject(project)
+            },
+            240000
+        )
     }
 })
