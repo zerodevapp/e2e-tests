@@ -2,6 +2,7 @@ import { ZeroDevProvider } from "@zerodev/sdk";
 import { type Hex, encodeFunctionData, type PublicClient } from "viem";
 import { type UserOperationCallData } from "@alchemy/aa-core";
 import type { Contract } from "../../src/types";
+import type { ExpectStatic } from "vitest";
 
 type BatchingOptions = {
     provider: ZeroDevProvider
@@ -9,7 +10,7 @@ type BatchingOptions = {
     erc721: Contract
 }
 
-export async function batching({ provider, publicClient, erc721}: BatchingOptions) {
+export async function batching({ provider, publicClient, erc721}: BatchingOptions, expect: ExpectStatic) {
     const address = await provider.getAddress()
 
     const oldBalance = await publicClient.readContract({ address: erc721.address, abi: erc721.abi, functionName: 'balanceOf', args: [address] }) as bigint

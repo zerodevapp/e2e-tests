@@ -1,16 +1,44 @@
-import { projectFixtures } from "../../src/fixtures/projectFixtures";
-import { ownerFixtures } from "../../src/fixtures/ownerFixtures";
 import { erc20Gas } from "../../src/tests";
-import { publicClientFixtures } from "../../src/fixtures/publicClientFixtures";
-import { contractFixtures } from "../../src/fixtures/contractFixtures";
+import { CHAIN_MAP, CHAIN_NODE_MAP, ERC20_ABI, ERC20_MAP, PROVIDERS } from "../../src/constants";
+import { createGasSponsoringPolicy, createProject, deleteProject } from "../../src/api";
+import { ownerFixtures } from "../../src/fixtures/ownerFixtures";
+import { createPublicClient, http } from "viem";
+import * as viemChains from 'viem/chains'
+import { teamFixtures } from "../../src/fixtures/teamFixtures";
 
 
-test
-    .extend(projectFixtures)
-    .extend(ownerFixtures)
-    .extend(publicClientFixtures)
-    .extend(contractFixtures)
-("erc20Gas", async ({ polygonMumbaiProject, privateKeyOwner, polygonMumbaiPublicClient, polygonMumbaiERC20 }) => {
+// All ERC20 Test Chains
+const chains = Object.keys(ERC20_MAP) as Array<keyof typeof ERC20_MAP>
 
-    await erc20Gas({ project: polygonMumbaiProject, owner: privateKeyOwner, publicClient: polygonMumbaiPublicClient, erc20: polygonMumbaiERC20 })
-}, 360000)
+// // Not working
+const chainsToSkip = ['arbitrumGoerli', 'optimismGoerli', 'avalancheFuji', 'baseGoerli']
+
+// runs test for each chain
+describe.sequential('erc20Gas', () => {
+    for (let provider of PROVIDERS)  {
+        describe(provider || 'Default', () => {
+            for (let chain of chains) {
+                if (chainsToSkip.includes(chain)) continue
+                it.extend(ownerFixtures).extend(teamFixtures).concurrent(
+                    chain,
+                    async ({privateKeyOwner: owner, team, expect}) => {
+                        const chainId = CHAIN_MAP[chain]
+                        const project = await createProject(team, 'TestProject', chainId)
+                        await createGasSponsoringPolicy(project)
+                        const publicClient = createPublicClient({ 
+                            chain: (Object.values(viemChains)).find(chain => chain.id === parseInt(chainId)) as viemChains.Chain,
+                            transport: http(CHAIN_NODE_MAP[chain])
+                        })
+                        const erc20 = {
+                            address: ERC20_MAP[chain],
+                            abi: ERC20_ABI
+                        }
+                        await erc20Gas({project, owner, publicClient, erc20, provider }, expect),
+                        await deleteProject(project)
+                    },
+                    240000
+                )
+            }
+        })
+    }
+})
