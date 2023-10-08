@@ -7,6 +7,6 @@ export default defineProject({
     exclude: [...configDefaults.exclude, "../**/*.test.ts", "../**/*.spec.ts"],
     name: "e2e-tests",
     maxConcurrency: 10,
-    singleThread: true // Seems buggy with multiple threads
+    singleThread: true, // Seems buggy with multiple threads
   },
 });

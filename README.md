@@ -21,7 +21,7 @@ Then open `.env` and set `API_KEY`.
 
 > **Warning**
 > Make sure to create a new account specifically for the tests since teams & projects will be wiped.
-You can generate an `API_KEY` here: https://dashboard.zerodev.app/account<br />
+> You can generate an `API_KEY` here: https://dashboard.zerodev.app/account<br />
 
 ## Run
 
