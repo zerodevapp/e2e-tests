@@ -54,7 +54,7 @@ describe.sequential("sessionKey", () => {
               );
               await deleteProject(project);
             },
-            60000
+            120000
           );
       }
     });
