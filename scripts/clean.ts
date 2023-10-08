@@ -18,7 +18,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  },
+  }
 );
 
 const teams = await listTeams();
@@ -28,5 +28,5 @@ await Promise.all(
     const projects = await listProjects(team);
     await Promise.all(projects.map(deleteProject));
     await deleteTeam(team);
-  }),
+  })
 );

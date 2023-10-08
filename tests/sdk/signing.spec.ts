@@ -21,17 +21,17 @@ describe("signing", () => {
         },
       });
       const chainName = Object.entries(CHAIN_MAP).find(
-        ([_, id]) => id === polygonMumbaiProject.chainId,
+        ([_, id]) => id === polygonMumbaiProject.chainId
       )![0] as ChainName;
       const jsonRpcProvider = new ethers.providers.JsonRpcProvider(
-        CHAIN_NODE_MAP[chainName],
+        CHAIN_NODE_MAP[chainName]
       );
       await signMessage(
         {
           provider: ecdsaProvider,
           jsonRpcProvider,
         },
-        expect,
+        expect
       );
 
       await signTypedData(
@@ -39,9 +39,9 @@ describe("signing", () => {
           provider: ecdsaProvider,
           jsonRpcProvider,
         },
-        expect,
+        expect
       );
     },
-    30000,
+    30000
   );
 });

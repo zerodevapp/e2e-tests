@@ -13,7 +13,7 @@ const createPublicClientFixture = (chainName: ChainName, chainId: ChainId) => {
   return async ({ task }, use) => {
     const publicClient = createPublicClient({
       chain: Object.values(chains).find(
-        (chain) => chain.id === parseInt(chainId),
+        (chain) => chain.id === parseInt(chainId)
       ),
       transport: http(CHAIN_NODE_MAP[chainName]),
     });
@@ -27,7 +27,7 @@ export const publicClientFixtures: Parameters<
   Object.entries(CHAIN_MAP).map(([chainName, chainId]) => [
     `${chainName}PublicClient`,
     createPublicClientFixture(chainName as ChainName, chainId as ChainId),
-  ]),
+  ])
 ) as unknown as PublicClientFixtures;
 
 export const withPublicClientFixtures = (environment: TestAPI = test) =>

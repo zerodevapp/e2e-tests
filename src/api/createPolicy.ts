@@ -4,14 +4,14 @@ import { API_URL } from "../constants";
 export async function createPolicy(
   project: Project,
   policyGroup: Policy["policyGroup"],
-  strategy: Policy["strategy"] = "pay_for_user",
+  strategy: Policy["strategy"] = "pay_for_user"
 ) {
   const response = await axios.post(
     `${API_URL}/projects/${project.id}/policies`,
     {
       policyGroup,
       strategy,
-    },
+    }
   );
   return response.data as Policy[];
 }

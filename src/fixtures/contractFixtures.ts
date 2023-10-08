@@ -15,13 +15,13 @@ export const contractFixtures: Parameters<
     Object.entries(ERC721_MAP).map(([chainName, address]) => [
       `${chainName}ERC721`,
       { address, abi: ERC721_ABI },
-    ]),
+    ])
   ),
   ...Object.fromEntries(
     Object.entries(ERC20_MAP).map(([chainName, address]) => [
       `${chainName}ERC20`,
       { address, abi: ERC20_ABI },
-    ]),
+    ])
   ),
 } as unknown as ContractFixtures;
 

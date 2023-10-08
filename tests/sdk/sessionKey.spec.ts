@@ -40,7 +40,7 @@ describe.sequential("sessionKey", () => {
               await createGasSponsoringPolicy(project);
               const publicClient = createPublicClient({
                 chain: Object.values(viemChains).find(
-                  (chain) => chain.id === parseInt(chainId),
+                  (chain) => chain.id === parseInt(chainId)
                 ) as viemChains.Chain,
                 transport: http(CHAIN_NODE_MAP[chain]),
               });
@@ -50,11 +50,11 @@ describe.sequential("sessionKey", () => {
               };
               await sessionKey(
                 { project, owner, publicClient, erc721, provider },
-                expect,
+                expect
               );
               await deleteProject(project);
             },
-            30000,
+            30000
           );
       }
     });

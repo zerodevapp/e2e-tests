@@ -31,7 +31,7 @@ describe.sequential("deploying", () => {
               const project = await createProject(
                 team,
                 "TestProject",
-                CHAIN_MAP[chain],
+                CHAIN_MAP[chain]
               );
               await createGasSponsoringPolicy(project);
               const ecdsaProvider = await ECDSAProvider.init({
@@ -51,7 +51,7 @@ describe.sequential("deploying", () => {
               await deploying({ provider: ecdsaProvider }, expect);
               await deleteProject(project);
             },
-            30000,
+            30000
           );
       }
     });

@@ -12,7 +12,7 @@ type MintingOptions = {
 
 export async function minting(
   { provider, publicClient, erc721 }: MintingOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   const address = await provider.getAddress();
 

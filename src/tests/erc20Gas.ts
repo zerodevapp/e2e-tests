@@ -19,7 +19,7 @@ type ERC20GasOptions = {
 
 export async function erc20Gas(
   { project, owner, publicClient, erc20, provider }: ERC20GasOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   const ecdsaProvider = await ECDSAProvider.init({
     projectId: project.id,
@@ -39,7 +39,7 @@ export async function erc20Gas(
   const projectWithoutSponsoring = await createProject(
     { id: project.teamId },
     "Sponsorless",
-    project.chainId,
+    project.chainId
   );
 
   const erc20ECDSAProvider = await ECDSAProvider.init({

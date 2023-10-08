@@ -21,7 +21,7 @@ type SessionKeyOptions = {
 
 export async function sessionKey(
   { project, owner, publicClient, erc721, provider }: SessionKeyOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   let ecdsaProvider = await ECDSAProvider.init({
     projectId: project.id,
@@ -39,7 +39,7 @@ export async function sessionKey(
   });
 
   const sessionKey = PrivateKeySigner.privateKeyToAccountSigner(
-    generatePrivateKey(),
+    generatePrivateKey()
   );
 
   const sessionKeyProvider = await SessionKeyProvider.init({

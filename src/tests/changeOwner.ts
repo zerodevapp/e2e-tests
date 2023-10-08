@@ -14,10 +14,10 @@ type ChangeOwnerOptions = {
 
 export async function changeOwner(
   { project, owner: originalOwner, provider }: ChangeOwnerOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   const newOwner = PrivateKeySigner.privateKeyToAccountSigner(
-    generatePrivateKey(),
+    generatePrivateKey()
   );
 
   let ecdsaProvider = await ECDSAProvider.init({
@@ -43,9 +43,9 @@ export async function changeOwner(
   await ecdsaProvider.waitForUserOperationTransaction(hash as Hex);
 
   await expect(() =>
-    deploying({ provider: ecdsaProvider }, expect),
+    deploying({ provider: ecdsaProvider }, expect)
   ).rejects.toThrowError(
-    /The bundler has failed to include UserOperation in a batch:/,
+    /The bundler has failed to include UserOperation in a batch:/
   );
 
   ecdsaProvider = await ECDSAProvider.init({

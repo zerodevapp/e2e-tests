@@ -12,7 +12,7 @@ type BatchingOptions = {
 
 export async function batching(
   { provider, publicClient, erc721 }: BatchingOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   const address = await provider.getAddress();
 

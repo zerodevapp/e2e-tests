@@ -4,7 +4,7 @@ import { API_URL } from "../constants";
 export async function createProject(
   team: Pick<Team, "id">,
   name: string,
-  chainId: ChainId,
+  chainId: ChainId
 ) {
   const response = await axios.post(`${API_URL}/teams/${team.id}/projects`, {
     name,

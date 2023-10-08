@@ -30,13 +30,13 @@ describe.sequential("changeOwner", () => {
               const project = await createProject(
                 team,
                 "TestProject",
-                CHAIN_MAP[chain],
+                CHAIN_MAP[chain]
               );
               await createGasSponsoringPolicy(project);
               await changeOwner({ project, owner, provider }, expect);
               await deleteProject(project);
             },
-            30000,
+            30000
           );
       }
     });

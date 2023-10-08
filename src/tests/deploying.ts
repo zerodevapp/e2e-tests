@@ -8,7 +8,7 @@ type DeployingOptions = {
 
 export async function deploying(
   { provider }: DeployingOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   const { hash } = await provider.sendUserOperation({
     target: "0x0000000000000000000000000000000000000000",
@@ -17,6 +17,6 @@ export async function deploying(
   });
   expect(hash).toBeDefined();
   expect(
-    await provider.waitForUserOperationTransaction(hash as Hex),
+    await provider.waitForUserOperationTransaction(hash as Hex)
   ).toBeDefined();
 }

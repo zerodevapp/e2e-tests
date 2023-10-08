@@ -12,7 +12,7 @@ type SigningOptions = {
 
 export async function signMessage(
   { provider, jsonRpcProvider }: SigningOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   // needs to be deployed
   await deploying({ provider }, expect);
@@ -30,7 +30,7 @@ export async function signMessage(
 
 export async function signTypedData(
   { provider, jsonRpcProvider }: SigningOptions,
-  expect: ExpectStatic,
+  expect: ExpectStatic
 ) {
   // needs to be deployed
   await deploying({ provider }, expect);

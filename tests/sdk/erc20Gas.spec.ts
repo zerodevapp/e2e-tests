@@ -40,7 +40,7 @@ describe.sequential("erc20Gas", () => {
           await createGasSponsoringPolicy(project);
           const publicClient = createPublicClient({
             chain: Object.values(viemChains).find(
-              (chain) => chain.id === parseInt(chainId),
+              (chain) => chain.id === parseInt(chainId)
             ) as viemChains.Chain,
             transport: http(CHAIN_NODE_MAP[chain]),
           });
@@ -51,7 +51,7 @@ describe.sequential("erc20Gas", () => {
           await erc20Gas({ project, owner, publicClient, erc20 }, expect);
           await deleteProject(project);
         },
-        30000,
+        30000
       );
   }
 });

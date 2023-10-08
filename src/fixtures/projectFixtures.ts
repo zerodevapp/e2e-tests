@@ -27,7 +27,7 @@ export const projectFixtures: Parameters<
   Object.entries(CHAIN_MAP).map(([chainName, chainId]) => [
     `${chainName}Project`,
     createProjectFixture(chainId as ChainId),
-  ]),
+  ])
 ) as unknown as ProjectFixtures;
 
 export const withProjectFixtures = (environment: TestAPI = test) =>
