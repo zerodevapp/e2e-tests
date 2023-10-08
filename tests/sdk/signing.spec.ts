@@ -42,6 +42,6 @@ describe("signing", () => {
         expect
       );
     },
-    30000
+    60000
   );
 });

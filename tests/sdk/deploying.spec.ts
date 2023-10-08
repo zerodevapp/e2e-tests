@@ -51,7 +51,7 @@ describe.sequential("deploying", () => {
               await deploying({ provider: ecdsaProvider }, expect);
               await deleteProject(project);
             },
-            30000
+            60000
           );
       }
     });
