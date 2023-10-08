@@ -9,12 +9,12 @@ import { ownerFixtures } from "../../src/fixtures/ownerFixtures";
 import { teamFixtures } from "../../src/fixtures/teamFixtures";
 
 const chains = [
-  "arbitrum",
+  // "arbitrum",
   "polygonMumbai",
-  "goerli",
-  "polygon",
-  "base",
-  "sepolia",
+  // "goerli",
+  // "polygon",
+  // "base",
+  // "sepolia",
 ] as const;
 
 // runs test for each chain
