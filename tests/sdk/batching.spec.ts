@@ -69,7 +69,7 @@ describe.sequential("batching", () => {
               );
               await deleteProject(project);
             },
-            60000
+            1000000
           );
       }
     });

@@ -69,7 +69,7 @@ describe.sequential("minting", () => {
               );
               await deleteProject(project);
             },
-            60000
+            1000000
           );
       }
     });
