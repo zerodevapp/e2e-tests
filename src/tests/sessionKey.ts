@@ -62,16 +62,16 @@ export async function sessionKey(
       validUntil: 9999999999,
       permissions: [
         getPermissionFromABI({
-            target: erc721.address,
-            abi: erc721.abi,
-            functionName: "mint",
-            args: [
-              {
-                operator: ParamOperator.EQUAL,
-                value: await ecdsaProvider.getAddress(),
-              }
-            ],
-          }),
+          target: erc721.address,
+          abi: erc721.abi,
+          functionName: "mint",
+          args: [
+            {
+              operator: ParamOperator.EQUAL,
+              value: await ecdsaProvider.getAddress(),
+            },
+          ],
+        }),
       ],
     },
   });
